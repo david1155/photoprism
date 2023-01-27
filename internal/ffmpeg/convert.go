@@ -121,6 +121,32 @@ func AvcConvertCommand(fileName, avcName, ffmpegBin, bitrate string, encoder Avc
 			avcName,
 		)
 
+	case TegraEncoder:
+		// ffmpeg -hide_banner -h encoder=h264_nvmpi
+		result = exec.Command(
+			ffmpegBin,
+			"-hwaccel", "auto",
+			"-i", fileName,
+			"-pix_fmt", "yuv420p",
+			"-c:v", string(encoder),
+			"-c:a", "aac",
+			"-preset", "15",
+			"-pixel_format", "yuv420p",
+			"-gpu", "any",
+			"-vf", "format=yuv420p",
+			"-rc:v", "constqp",
+			"-cq", "0",
+			"-tune", "2",
+			"-r", "30",
+			"-b:v", bitrate,
+			"-profile:v", "1",
+			"-level:v", "auto",
+			"-coder:v", "1",
+			"-f", "mp4",
+			"-y",
+			avcName,
+		)
+
 	case Video4LinuxEncoder:
 		// ffmpeg -hide_banner -h encoder=h264_v4l2m2m
 		format := "format=yuv420p"

@@ -17,6 +17,7 @@ const (
 	AppleEncoder       AvcEncoder = "h264_videotoolbox" // AppleEncoder is the Apple Video Toolbox H.264 encoder.
 	VAAPIEncoder       AvcEncoder = "h264_vaapi"        // VAAPIEncoder is the Video Acceleration API H.264 encoder.
 	NvidiaEncoder      AvcEncoder = "h264_nvenc"        // NvidiaEncoder is the NVIDIA H.264 encoder.
+	TegraEncoder       AvcEncoder = "h264_nvmpi"        // NvidiaEncoder is the NVIDIA H.264 encoder.
 	Video4LinuxEncoder AvcEncoder = "h264_v4l2m2m"      // Video4LinuxEncoder is the Video4Linux H.264 encoder.
 )
 
@@ -42,6 +43,9 @@ var AvcEncoders = map[string]AvcEncoder{
 	"nvenc":                    NvidiaEncoder,
 	"cuda":                     NvidiaEncoder,
 	string(NvidiaEncoder):      NvidiaEncoder,
+	"tegra":                    TegraEncoder,
+	"nvmpi":                    TegraEncoder,
+	string(TegraEncoder):       TegraEncoder,
 	"v4l2":                     Video4LinuxEncoder,
 	"v4l":                      Video4LinuxEncoder,
 	"video4linux":              Video4LinuxEncoder,
